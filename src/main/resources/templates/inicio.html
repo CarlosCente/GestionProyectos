@@ -31,9 +31,9 @@
 								 		<button type="button" class="btn btn-default mr-1">
 											<span class="far fa-edit"></span>
 										</button>
-								 		<button type="button" class="btn btn-default ml-1">
+								 		<a th:href="@{/proyectos/eliminar/} + ${proyecto}" type="button" class="btn btn-default ml-1">
 											<span class="far fa-trash-alt" style="color: red;"></span>
-										</button>
+										</a>
 									</div>
 								</td>
 						    </tr>
@@ -60,7 +60,7 @@
 						  </thead>
 						  <tbody>
 						    <tr th:each="proyecto: ${listaProyectosUtilizados}">
-						      <td><a href="#" th:text="${proyecto.nombre_proyecto}"></a></td>
+						      <td><a th:text="${proyecto.nombre_proyecto}"></a></td>
 						      <td th:text="${proyecto.ultima_modificacion}"></td>
 						    </tr>
 						  </tbody>

@@ -1,7 +1,7 @@
 CREATE DATABASE IF NOT EXISTS db_gestionproyectos;
 USE db_gestionproyectos;
 
-DROP TABLE PROYECTOS;
+DROP TABLE IF EXISTS PROYECTOS;
 CREATE TABLE IF NOT EXISTS PROYECTOS(
 	proyecto_id int AUTO_INCREMENT,
 	nombre_proyecto varchar(150) NOT NULL UNIQUE,
