@@ -1,14 +1,14 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments/fragments::head">
 <meta charset="UTF-8" />
-</head>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.css"></head>
 <body style="background-color: #f3f3f3">
 	<div class="container">
-		<div class="page-header mt-5 text-center">
+		<div class="page-header mt-4 text-center">
 			<h1>Seleccionar proyecto</h1>
 			<hr class="bg-primary">
 		</div>
-		<div class="row mt-5">
+		<div class="row mt-4">
 			<div class="col-md-6 text-center">
 
 				<div class="card h-100">
@@ -16,21 +16,30 @@
 						<h5 class="card-title mb-0">Proyectos Existentes</h5>
 					</div>
 					<div class="card-body">
-
-						<table class="table table-striped text-center">
+						<table id="tableProyectos" class="table table-sm text-center">
+							<thead style="background-color: #e5ddea">
+						    <tr>
+						      <th scope="col">Proyecto</th>
+						      <th scope="col">Acciones</th>
+						    </tr>
+						  </thead>
 						  <tbody>
-						    <tr>
-						      <td>Vodafone</td>
-						    </tr>
-						    <tr>
-						      <td>Jazztel</td>
-						    </tr>
-						    <tr>
-						      <td>Prueba</td>
+						    <tr th:each="proyecto: ${listaNombresProyectos}">
+								<td><a href="#" th:text="${proyecto}"></a></td>
+								<td>
+								 	<div class="btn-group">
+								 		<button type="button" class="btn btn-default mr-1">
+											<span class="far fa-edit"></span>
+										</button>
+								 		<button type="button" class="btn btn-default ml-1">
+											<span class="far fa-trash-alt" style="color: red;"></span>
+										</button>
+									</div>
+								</td>
 						    </tr>
 						  </tbody>
 						</table>
-
+						<button type="button" class="btn mt-3 btn-primary text-white">Crear un nuevo proyecto</button>
 					</div>
 				</div>
 
@@ -39,28 +48,20 @@
 
 				<div class="card h-100">
 					<div class="card-header text-white" style="background-color: #766b9c">
-						<h5 class="card-title mb-0">Abiertos recientemente</h5>
+						<h5 class="card-title mb-0">Últimos proyectos modificados</h5>
 					</div>
 					<div class="card-body">
-							<table class="table table-striped text-center">
-						  <thead>
+							<table class="table text-center">
+						  <thead style="background-color: #e5ddea">
 						    <tr>
 						      <th scope="col">Proyecto</th>
 						      <th scope="col">Ultima modificación</th>
 						    </tr>
 						  </thead>
 						  <tbody>
-						    <tr>
-						      <td>Vodafone</td>
-						      <td>11-10-2020</td>
-						    </tr>
-						    <tr>
-						      <td>Jazztel</td>
-						       <td>08-10-2020</td>
-						    </tr>
-						    <tr>
-						      <td>Prueba</td>
-						       <td>02-10-2020</td>
+						    <tr th:each="proyecto: ${listaProyectosUtilizados}">
+						      <td><a href="#" th:text="${proyecto.nombre_proyecto}"></a></td>
+						      <td th:text="${proyecto.ultima_modificacion}"></td>
 						    </tr>
 						  </tbody>
 						</table>
@@ -71,5 +72,26 @@
 		</div>
 	</div>
 	<footer th:replace="fragments/fragments::footer"></footer>
+	<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.js"></script>
+	<script>
+	$(document).ready( function () {
+		var table = $('#tableProyectos').DataTable({
+			"pagingType": "numbers",
+			"language": {
+				"lengthMenu": "",
+				"search": "Buscar proyecto: ",
+				"info" : "",
+				"infoFiltered": "(filtrados de _MAX_ registros en total)",
+				"loadingRecords": "Cargando...",
+				"processing": "Procesando...",
+				"infoEmpty": "No se encuentran proyectos",
+				"zeroRecords":"Sin resultados"
+			},
+			"lengthMenu": [5],
+			"order": [0, 'asc']
+		});
+	 });
+	
+	</script>
 </body>
 </html>
