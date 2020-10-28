@@ -55,8 +55,8 @@ public class InicioController {
 		los datos de los que se han utilizado por ultima vez*/
 		
 		List<Proyecto> proyectosUtilizadosUlt = proyectoConsultas.consultarProyectosUltimaModif();
-		if(proyectosUtilizadosUlt.size()>5) {
-			proyectosUtilizadosUlt = proyectosUtilizadosUlt.subList(0, 6);
+		if(proyectosUtilizadosUlt.size()>8) {
+			proyectosUtilizadosUlt = proyectosUtilizadosUlt.subList(0, 8);
 		}
 		
 		modelo.addAttribute("listaProyectosUtilizados", proyectosUtilizadosUlt);
