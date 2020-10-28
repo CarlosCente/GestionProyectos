@@ -12,7 +12,6 @@ CREATE TABLE IF NOT EXISTS PROYECTOS(
 );
 
 
-//DATOS DE PRUEBA PARA LA TABLA PROYECTOS
 INSERT INTO PROYECTOS (nombre_proyecto, createAt, ultima_modificacion, descripcion) VALUES
 ('BIGMATIC', '2020-10-26 07:58', '2020-10-26 08:00', 'Proyecto de prueba');
 INSERT INTO PROYECTOS (nombre_proyecto, createAt, ultima_modificacion, descripcion) VALUES
