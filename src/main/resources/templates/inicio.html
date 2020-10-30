@@ -30,9 +30,9 @@
 									<td><a href="#" th:text="${proyecto}"></a></td>
 									<td>
 										<div class="btn-group">
-											<button type="button" class="btn btn-default mr-1">
+											<a th:href="@{/proyectos/modificar/} + ${proyecto}" type="button" class="btn btn-default mr-1">
 												<span class="far fa-edit"></span>
-											</button>
+											</a>
 											<a type="button" onclick="return mostrarConfirmacion()"
 												href="#" class="btn btn-default ml-1"> <span
 												class="far fa-trash-alt" style="color: red;"></span>
@@ -79,7 +79,7 @@
 		</div>
 	</div>
 
-	<!-- Modal -->
+	<!-- Modal Crear Proyecto -->
 	<div class="modal fade" id="modalNuevoProyecto" role="dialog">
 		<div class="modal-dialog">
 			<div class="modal-content">
