@@ -1,13 +1,22 @@
 package com.cjhercen.gestion.proyectos.models;
 
-import java.sql.Timestamp;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.Length;
 
 public class Proyecto {
 
 	private int id_proyecto;
+	
+	@NotNull
+	@Length(max=150)
 	private String nombre_proyecto;
+	
 	private String createAt;
+	
 	private String ultima_modificacion;
+	
+	@Length(max=500)
 	private String descripcion;
 
 	public int getId_proyecto() {

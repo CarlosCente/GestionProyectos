@@ -29,7 +29,7 @@ public final class ConexionBD {
     	{
     	   Class.forName("com.mysql.cj.jdbc.Driver");
        	   //Se establece la conexion con la BD
-    	   conexion = DriverManager.getConnection ("jdbc:mysql://localhost/db_gestionproyectos?serverTimezone=Europe/Madrid&useSSL=false","root", "c13j12h92cZA*");
+    	   conexion = DriverManager.getConnection ("jdbc:mysql://localhost/db_gestionproyectos?serverTimezone=Europe/Madrid&allowPublicKeyRetrieval=true&useSSL=false","root", "c13j12h92cZA*");
     	   myLog.info("La conexion con la BD se ha establecido con éxito");
     	} catch (Exception e)
     	{

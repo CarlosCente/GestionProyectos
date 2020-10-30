@@ -59,6 +59,10 @@ public class InicioController {
 			proyectosUtilizadosUlt = proyectosUtilizadosUlt.subList(0, 8);
 		}
 		
+		//Se añade el objeto para poder crear proyectos
+		Proyecto nuevoProyecto = new Proyecto();
+		
+		modelo.addAttribute("proyecto", nuevoProyecto);
 		modelo.addAttribute("listaProyectosUtilizados", proyectosUtilizadosUlt);
 		modelo.addAttribute("listaNombresProyectos", nombresProyectos);
 		modelo.addAttribute("mostrarMensajeProyectos", mostrarMensajeNoProyectos);
