@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.cjhercen.gestion.proyectos.dao.proyectos.ProyectosAltas;
 import com.cjhercen.gestion.proyectos.dao.proyectos.ProyectosBorrado;
@@ -89,7 +90,7 @@ public class ProyectoController {
 	
 	@RequestMapping(value = "/proyectos/modificacion",  method = RequestMethod.POST)
 	public String realizarModificacion(@Valid Proyecto proyecto, BindingResult result, Model model,
-			SessionStatus status) {
+			SessionStatus status, RedirectAttributes flash) {
 		
 		//Se obtienen los datos actuales del proyecto en BD
 		int idProyectoBD = proyecto.getId_proyecto();
@@ -120,10 +121,11 @@ public class ProyectoController {
 			} else {
 				myLog.info("No hay cambios, no se ha modificado el proyecto");
 				model.addAttribute("proyecto", proyectoBD);
+				return "modificarproyecto";
 			}
 			
-			return "modificarproyecto";
-			
+			return "redirect:/proyectos/modificar/" + proyectoNuevo.getNombre_proyecto();
+	
 		}
 		
 		return "modificarproyecto";

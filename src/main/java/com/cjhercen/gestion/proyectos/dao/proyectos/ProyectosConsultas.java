@@ -20,7 +20,7 @@ public class ProyectosConsultas {
 	
 	String queryConsultaProyectoPorNombre = "SELECT * FROM PROYECTOS WHERE nombre_proyecto =";
 
-	String queryConsultaProyectosUltimaModif = "SELECT nombre_proyecto, ultima_modificacion FROM PROYECTOS ORDER BY ultima_modificacion";
+	String queryConsultaProyectosUltimaModif = "SELECT nombre_proyecto, ultima_modificacion FROM PROYECTOS ORDER BY ultima_modificacion DESC";
 	
 	ConexionBD conexionBD = new ConexionBD();
 	

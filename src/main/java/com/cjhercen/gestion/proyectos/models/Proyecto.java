@@ -9,7 +9,7 @@ public class Proyecto {
 	private int id_proyecto;
 	
 	@NotNull
-	@Length(max=150)
+	@Length(min=3, max=150)
 	private String nombre_proyecto;
 	
 	private String createAt;
