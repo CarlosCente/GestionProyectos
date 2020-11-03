@@ -15,7 +15,7 @@
 					<div class="card-header text-white"
 						style="background-color: #766b9c">
 						<h5 class="card-title mb-0">
-							Nombre del proyecto: &nbsp;&nbsp; <em class="text-warning"
+							Proyecto: &nbsp;&nbsp; <em class="text-warning"
 								th:text="${proyecto.nombre_proyecto}"></em>
 						</h5>
 					</div>
@@ -23,38 +23,49 @@
 						<form role="form" th:action="@{/proyectos/modificacion}"
 							th:object="${proyecto}" method="post">
 							<div class="row">
-								<div class="col-md-1"></div>
+								<div class="col-md-1">
+									<div class="form-group">
+										<input type="hidden" name="id_proyecto"
+											th:field="*{id_proyecto}" class="form-control text-center"
+											id="inputMessage"></input>
+									</div>
+								</div>
 								<div class="col-md-4">
 									<div class="form-group">
-										<label style="color: #766b9c" for="inputMessage">Nombre del proyecto</label> <input type="text"
-											name="descripcion" th:field="*{nombre_proyecto}"
+										<label style="color: #766b9c" for="inputMessage">Nombre
+											del proyecto</label> <input type="text" name="nombre_proyecto"
+											th:field="*{nombre_proyecto}"
 											class="form-control text-center" id="inputMessage"></input>
 									</div>
 								</div>
 								<div class="col-md-3">
 									<div class="form-group">
-										<label style="color: #766b9c" for="inputMessage">Fecha de creación</label> <input
-											type="datetime" name="descripcion" th:field="*{createAt}"
-											class="form-control text-center" id="inputMessage" disabled></input>
+										<label style="color: #766b9c" for="inputMessage">Fecha
+											de creación</label> <input type="datetime" name="createAt"
+											th:field="*{createAt}" class="form-control text-center"
+											id="inputMessage" disabled></input>
 									</div>
 								</div>
 								<div class="col-md-3">
 									<div class="form-group">
-										<label style="color: #766b9c" for="inputMessage">Últ. modificación</label> <input
-											type="datetime" name="descripcion"
-											th:field="*{ultima_modificacion}"
+										<label style="color: #766b9c" for="inputMessage">Últ.
+											modificación</label> <input type="datetime"
+											name="ultima_modificacion" th:field="*{ultima_modificacion}"
 											class="form-control text-center" id="inputMessage" disabled></input>
 									</div>
 								</div>
-								<div class="col-md-1"></div>
+								<div class="col-md-1">
+								</div>
 							</div>
 							<div class="form-group">
-								<label style="color: #766b9c" for="inputMessage">Descripción del proyecto</label>
+								<label style="color: #766b9c" for="inputMessage">Descripción
+									del proyecto</label>
 								<textarea name="descripcion" th:field="*{descripcion}"
 									class="form-control" id="inputMessage"></textarea>
 							</div>
 							<div class="modal-footer">
-							<button type="submit" class="btn btn-primary">Volver</button>
+								<a th:href="@{/inicio}" type="submit"
+									class="btn btn-primary">Volver</a>
 								<button type="submit" class="btn btn-primary">Guardar
 									cambios</button>
 							</div>

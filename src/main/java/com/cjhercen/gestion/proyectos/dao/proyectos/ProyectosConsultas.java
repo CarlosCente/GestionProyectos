@@ -16,7 +16,7 @@ public class ProyectosConsultas {
 
 	String queryConsultaProyectos = "SELECT * FROM PROYECTOS";
 	
-	String queryConsultaProyectoPorId = "SELECT * FROM PROYECTOS WHERE id_proyecto = ?";
+	String queryConsultaProyectoPorId = "SELECT * FROM PROYECTOS WHERE proyecto_id =";
 	
 	String queryConsultaProyectoPorNombre = "SELECT * FROM PROYECTOS WHERE nombre_proyecto =";
 
@@ -160,5 +160,51 @@ public class ProyectosConsultas {
 		}
 		return proyecto;
 	}
+	
+	public Proyecto consultarProyectoPorId(int id_proyecto) {
+		Proyecto proyecto = new Proyecto();
+		Statement st = null;
+		Connection conexion = null;
+		ResultSet rs = null;
+
+		try {
+			conexion = ConexionBD.getConnection();
+			st = conexion.createStatement();
+			rs = st.executeQuery (queryConsultaProyectoPorId + id_proyecto);
+			
+			// Se recorre el ResultSet, mostrando por pantalla los resultados.
+            while (rs.next())
+            {
+            	proyecto.setId_proyecto(rs.getInt(1));
+            	proyecto.setNombre_proyecto(rs.getString(2));
+            	proyecto.setCreateAt(rs.getString(3));
+            	proyecto.setUltima_modificacion(rs.getString(4));
+            	proyecto.setDescripcion(rs.getString(5));
+            
+            }
+			
+			 
+			// Se cierra la conexión con la base de datos.
+            conexion.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NamingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (st != null)
+					st.close();
+				if(conexion != null)
+					conexion.close();
+			} catch (Exception e) {
+			}
+		}
+		return proyecto;
+	}
+	
 	
 }

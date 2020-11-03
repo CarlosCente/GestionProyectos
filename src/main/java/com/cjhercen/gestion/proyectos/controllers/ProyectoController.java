@@ -16,6 +16,7 @@ import org.springframework.web.bind.support.SessionStatus;
 import com.cjhercen.gestion.proyectos.dao.proyectos.ProyectosAltas;
 import com.cjhercen.gestion.proyectos.dao.proyectos.ProyectosBorrado;
 import com.cjhercen.gestion.proyectos.dao.proyectos.ProyectosConsultas;
+import com.cjhercen.gestion.proyectos.dao.proyectos.ProyectosModificaciones;
 import com.cjhercen.gestion.proyectos.models.Proyecto;
 import com.cjhercen.gestion.proyectos.utils.FechaUtils;
 
@@ -83,6 +84,49 @@ public class ProyectoController {
 		} else {
 			return "redirect:/";
 		}	
+
+	}
+	
+	@RequestMapping(value = "/proyectos/modificacion",  method = RequestMethod.POST)
+	public String realizarModificacion(@Valid Proyecto proyecto, BindingResult result, Model model,
+			SessionStatus status) {
+		
+		//Se obtienen los datos actuales del proyecto en BD
+		int idProyectoBD = proyecto.getId_proyecto();
+		ProyectosConsultas consultas = new ProyectosConsultas();
+		Proyecto proyectoBD = consultas.consultarProyectoPorId(idProyectoBD);
+		
+		ProyectosModificaciones modificaciones = new ProyectosModificaciones();
+		
+		if(proyectoBD != null) {
+			Proyecto proyectoNuevo = new Proyecto();
+
+			//DATOS BD del proyecto
+			String nombreBD = proyectoBD.getNombre_proyecto();
+			String descripcionBD = proyectoBD.getDescripcion();
+			//DATOS que se pasan por el formulario
+			String nombreNuevo = proyecto.getNombre_proyecto();
+			String descripcionNueva = proyecto.getDescripcion();
+			
+			if(!nombreBD.equalsIgnoreCase(nombreNuevo) || !descripcionBD.equalsIgnoreCase(descripcionNueva)) {
+				proyectoNuevo.setNombre_proyecto(nombreNuevo);
+				proyectoNuevo.setCreateAt(proyectoBD.getCreateAt());
+				proyectoNuevo.setUltima_modificacion(fechaUtils.obtenerFechaActual());
+				proyectoNuevo.setDescripcion(descripcionNueva);
+				
+				modificaciones.modificarProyecto(proyectoNuevo, idProyectoBD);
+				model.addAttribute("proyecto", proyectoNuevo);
+				myLog.info("Hay cambios, se ha modificado el proyecto");
+			} else {
+				myLog.info("No hay cambios, no se ha modificado el proyecto");
+				model.addAttribute("proyecto", proyectoBD);
+			}
+			
+			return "modificarproyecto";
+			
+		}
+		
+		return "modificarproyecto";
 
 	}
 	
