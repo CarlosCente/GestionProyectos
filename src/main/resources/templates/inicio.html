@@ -1,4 +1,5 @@
 <html xmlns:th="http://www.thymeleaf.org">
+<link th:rel="stylesheet" th:href="@{/css/templates/inicio.css} "/>
 <head th:replace="fragments/fragments::head">
 <meta charset="UTF-8" />
 </head>
@@ -96,7 +97,7 @@
 				<!-- Modal Body -->
 				<div class="modal-body">
 					<p class="statusMsg"></p>
-					<form role="form" th:action="@{/proyectos/insertar}"
+					<form id="nuevoProyecto" role="form" th:action="@{/proyectos/insertar}"
 						th:object="${proyecto}" method="post">
 						<div class="form-group">
 							<label for="inputName">Nombre del proyecto</label> <input
@@ -190,6 +191,35 @@
 
 	</script>
 
+<script>
+$(document).ready(function () {
+    $('#nuevoProyecto').validate({
+        rules: {
+        	nombre_proyecto: { 
+        		required: true,
+        		maxlength: 150
+        	},
+        	descripcion: {
+                maxlength: 500
+            }
+        },
+        messages: {
+        	nombre_proyecto: {
+                required: "El nombre del proyecto es obligatorio",
+            	maxlength: "El nombre del proyecto puede tener como máximo 150 caracteres"
+            },
+            descripcion: {
+            	maxlength: "La descripcion puede tener como máximo 500 caracteres"
+            }
+        },
+        submitHandler: function (form) {
+            $(form).submit();
+        }
+    });
+});
+
+
+</script>
 
 </body>
 </html>

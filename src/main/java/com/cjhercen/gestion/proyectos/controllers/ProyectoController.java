@@ -48,10 +48,7 @@ public class ProyectoController {
 	@RequestMapping(value = "/proyectos/insertar", method = RequestMethod.POST)
 	public String insertarProyecto(@Valid Proyecto proyecto, BindingResult result, Model model,
 			SessionStatus status) {
-		
-		if (result.hasErrors()) {
-			return "/";
-		}
+	
 		
 		ProyectosAltas altas = new ProyectosAltas();
 		Proyecto proyectoNuevo = new Proyecto();
@@ -89,7 +86,7 @@ public class ProyectoController {
 	}
 	
 	@RequestMapping(value = "/proyectos/modificacion",  method = RequestMethod.POST)
-	public String realizarModificacion(@Valid Proyecto proyecto, BindingResult result, Model model,
+	public String realizarModificacion(@Valid Proyecto proyecto, BindingResult result,
 			SessionStatus status, RedirectAttributes flash) {
 		
 		//Se obtienen los datos actuales del proyecto en BD
@@ -116,16 +113,18 @@ public class ProyectoController {
 				proyectoNuevo.setDescripcion(descripcionNueva);
 				
 				modificaciones.modificarProyecto(proyectoNuevo, idProyectoBD);
-				model.addAttribute("proyecto", proyectoNuevo);
 				myLog.info("Hay cambios, se ha modificado el proyecto");
+				flash.addFlashAttribute("tipo", "Información");
+				flash.addFlashAttribute("message", "Se ha modificado el proyecto correctamente");
+				return "redirect:/proyectos/modificar/" + proyectoNuevo.getNombre_proyecto();
+
 			} else {
 				myLog.info("No hay cambios, no se ha modificado el proyecto");
-				model.addAttribute("proyecto", proyectoBD);
-				return "modificarproyecto";
+				flash.addFlashAttribute("tipo", "Información");
+				flash.addFlashAttribute("message", "No hay cambios en los datos del proyecto");
+				return "redirect:/proyectos/modificar/" + proyectoBD.getNombre_proyecto();
 			}
-			
-			return "redirect:/proyectos/modificar/" + proyectoNuevo.getNombre_proyecto();
-	
+				
 		}
 		
 		return "modificarproyecto";

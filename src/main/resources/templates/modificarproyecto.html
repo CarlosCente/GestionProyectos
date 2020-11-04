@@ -1,4 +1,5 @@
 <html xmlns:th="http://www.thymeleaf.org">
+<link th:rel="stylesheet" th:href="@{/css/templates/modificarProyecto.css} "/>
 <head th:replace="fragments/fragments::head">
 <meta charset="UTF-8" />
 </head>
@@ -20,7 +21,7 @@
 						</h5>
 					</div>
 					<div class="card-body">
-						<form role="form" th:action="@{/proyectos/modificacion}"
+						<form id="modificarProyecto" role="form" th:action="@{/proyectos/modificacion}"
 							th:object="${proyecto}" method="post">
 							<div class="row">
 								<div class="col-md-1">
@@ -56,11 +57,15 @@
 								</div>
 								<div class="col-md-1"></div>
 							</div>
-							<div class="form-group">
-								<label style="color: #766b9c" for="inputMessage">Descripción
-									del proyecto</label>
-								<textarea name="descripcion" th:field="*{descripcion}"
-									class="form-control" id="inputMessage"></textarea>
+							<div class="row">
+								<div class="col-md-12">
+									<div class="form-group">
+										<label style="color: #766b9c" for="inputMessage">Descripción
+											del proyecto</label>
+										<textarea name="descripcion" th:field="*{descripcion}"
+											class="form-control" id="inputMessage"></textarea>
+									</div>
+								</div>
 							</div>
 							<div class="modal-footer">
 								<a th:href="@{/inicio}" type="submit" class="btn btn-primary">Volver</a>
@@ -75,7 +80,77 @@
 		</div>
 	</div>
 
+	<!-- Modal -->
+	<div class="modal fade" id="modalFlash" tabindex="-1" role="dialog"
+		aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<div
+					th:class="${tipo == 'Error'} ? 'modal-header bg-danger text-white' : 'modal-header bg-primary text-white'">
+					<div class="modal-title" id="exampleModalLongTitle">
+						<i class="fas fa-exclamation-triangle"></i> <span
+							th:text="${tipo}"></span>
+					</div>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<h6 th:text="${message}"></h6>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"
+						data-dismiss="modal">Cerrar</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
 	<footer th:replace="fragments/fragments::footer"></footer>
 
+
+	<script th:inline="javascript">
+
+	$(document).ready( function () {
+		var message = /*[[${message}]]*/;
+		if(message.length > 0){
+			$('#modalFlash').modal('show');
+		}
+		
+	});
+	
+	</script>
+	
+	<script>
+$(document).ready(function () {
+    $('#modificarProyecto').validate({
+        rules: {
+        	nombre_proyecto: { 
+        		required: true,
+        		maxlength: 150
+        	},
+        	descripcion: {
+                maxlength: 500
+            }
+        },
+        messages: {
+        	nombre_proyecto: {
+                required: "El nombre del proyecto es obligatorio",
+            	maxlength: "El nombre del proyecto puede tener como máximo 150 caracteres"
+            },
+            descripcion: {
+            	maxlength: "La descripcion puede tener como máximo 500 caracteres"
+            }
+        },
+        submitHandler: function (form) {
+            $(form).submit();
+        }
+    });
+});
+
+
+</script>
+	
 </body>
 </html>
