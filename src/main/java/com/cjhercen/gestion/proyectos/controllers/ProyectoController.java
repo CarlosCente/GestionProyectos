@@ -34,9 +34,9 @@ public class ProyectoController {
 
 		if(proyecto != null && proyecto.length() >=16) {
 			proyecto = proyecto.substring(0, proyecto.length()-4);
-			proyecto = proyecto.substring(12);
+			String proyectoPartes[] = proyecto.split(">");
+			proyecto = proyectoPartes[1];
 		}
-		
 		ProyectosBorrado borrados = new ProyectosBorrado();
 		borrados.borrarProyectoPorNombre(proyecto);
 		

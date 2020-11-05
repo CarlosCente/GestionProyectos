@@ -28,7 +28,7 @@
 							</thead>
 							<tbody>
 								<tr th:each="proyecto: ${listaNombresProyectos}">
-									<td><a href="#" th:text="${proyecto}"></a></td>
+									<td><a th:href="@{/principal/} + ${proyecto}" th:text="${proyecto}"></a></td>
 									<td>
 										<div class="btn-group">
 											<a th:href="@{/proyectos/modificar/} + ${proyecto}"
@@ -68,7 +68,7 @@
 							</thead>
 							<tbody>
 								<tr th:each="proyecto: ${listaProyectosUtilizados}">
-									<td><a href="#" th:text="${proyecto.nombre_proyecto}"></a></td>
+									<td><a th:href="@{/principal/} + ${proyecto.nombre_proyecto}" th:text="${proyecto.nombre_proyecto}"></a></td>
 									<td th:text="${proyecto.ultima_modificacion}"></td>
 								</tr>
 							</tbody>
