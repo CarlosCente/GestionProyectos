@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head">
+    <meta charset="UTF-8"/>
+    <title>Gestion de Proyectos</title>
+ 	<link th:rel="stylesheet" th:href="@{/css/bootstrap.min.css} "/>
+ 	<link th:rel="stylesheet" th:href="@{/css/all.css} "/>
+ 	<link th:rel="stylesheet" th:href="@{/css/fontawesome.css} "/>
+ 	<link rel="stylesheet" type="text/css" th:href="@{/css/sweetalert/sweetalert2.min.css}" />
+ 	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.css">
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css">
+
+</head>
+<body>
+    <header th:fragment="header">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item active">
+                <a class="nav-link" href="#">Gestión de Proyectos <span class="sr-only">(current)</span></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link"> Gestión de Técnicos </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link"> Gestión de Incidencias </a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+    </header>
+    
+    <div class="container">
+    </div>
+    
+    <footer th:fragment="footer">
+	   	<script th:src="@{/js/jquery/jquery-3.5.1.js}"></script>
+		<script th:src="@{/js/popper/popper.min.js}"></script>
+		<script th:src="@{/js/bootstrap.min.js}"></script>
+		<script th:src="@{/js/sweetalert/sweetalert2.all.min.js}"></script>	
+		<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
+		<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.js"></script>
+    	<script language="javascript" type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.10.0/jquery.validate.min.js"></script>
+    </footer>
+</body>
+</html>
