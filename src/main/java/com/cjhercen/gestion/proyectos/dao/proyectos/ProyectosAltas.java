@@ -3,6 +3,7 @@ package com.cjhercen.gestion.proyectos.dao.proyectos;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.sql.Timestamp;
 
 import javax.naming.NamingException;
@@ -35,10 +36,8 @@ public class ProyectosAltas {
 			preparedStmt.setTimestamp(2, createAt );
 			preparedStmt.setTimestamp(3, ultimaModi);
 			preparedStmt.setString(4, proyecto.getDescripcion());
-			
-		    preparedStmt.execute();
-			
-			 
+						
+			preparedStmt.execute();
 			// Se cierra la conexión con la base de datos.
             conexion.close();
 		} catch (SQLException e) {
