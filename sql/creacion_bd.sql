@@ -22,3 +22,16 @@ INSERT INTO PROYECTOS (nombre_proyecto, createAt, ultima_modificacion, descripci
 ('PEPEPHONE', '2020-10-23 08:54', '2020-10-25 09:25', 'Proyecto de prueba de pepephone');
 INSERT INTO PROYECTOS (nombre_proyecto, createAt, ultima_modificacion, descripcion) VALUES
 ('VALLADOLID', '2020-10-26 08:55', '2020-10-26 12:45', 'Proyecto de prueba de valladolid');
+
+
+
+DROP TABLE IF EXISTS PROV_LOC_KM;
+CREATE TABLE IF NOT EXISTS PROV_LOC_KM(
+	id_reg int AUTO_INCREMENT,
+	localidad varchar(150) NOT NULL UNIQUE,
+	provincia varchar(150) NOT NULL,
+	kilometros double not null,
+	PRIMARY KEY(id_reg)
+);
+
+INSERT INTO PROV_LOC_KM (localidad, provincia, kilometros) VALUES ('Palencia', 'Palencia', 63.2);
