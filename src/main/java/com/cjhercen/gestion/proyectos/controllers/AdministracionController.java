@@ -31,4 +31,18 @@ public class AdministracionController {
 
 	}
 	
+	@RequestMapping(value = "/administracionparametros")
+	public String administracionParametros(Model modelo, HttpSession sesion) {
+
+		String nombreProyecto = (String) sesion.getAttribute("proyectoActivo");
+		myLog.info("Proyecto activo en administracion: " + nombreProyecto);
+		myLog.info("Entrada en administracion... ");
+		
+		//Se añade el proyecto activo que hay en sesion para poder volver a la pantalla del proyecto
+		modelo.addAttribute("proyectoActivo", nombreProyecto);
+		
+		return "administracionparametros";
+
+	}
+	
 }
