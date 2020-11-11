@@ -1,91 +1,153 @@
 <html xmlns:th="http://www.thymeleaf.org">
+<link th:rel="stylesheet"
+	th:href="@{/css/templates/administracion.css} " />
 <head th:replace="fragments/fragments::head">
 <meta charset="UTF-8" />
 </head>
-<body style="background-color: #f3f3f3">
- <header>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto  ">
-			
-              <li class="nav-item mr-3 ml-2">
-                <a class="nav-link" th:href="@{/principal/} + ${proyectoActivo}">Gestión del Proyecto <span class="sr-only">(current)</span></a>
-              </li>
-              <li class="nav-item mr-3 ml-3">
-                <a class="nav-link" th:href="@{/tecnicos}"> Gestión de Técnicos </a>
-              </li>
-              <li class="nav-item mr-3 ml-3">
-                <a class="nav-link" th:href="@{/incidencias}"> Gestión de Incidencias </a>
-              </li>
-               <li class="nav-item active mr-3 ml-3">
-                <a class="nav-link" href="#"><strong> Administración</strong> </a>
-              </li>
-            </ul>
-          </div>
-          <a class="navbar-brand text-warning pt-2 pb-2" th:href="@{/principal/logout}"><small><strong>Cerrar
-					proyecto</strong></small></a>
-        </nav>
-    </header>
+<body style="background-color: #f3f3f3;">
+	<header>
+		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav mr-auto  ">
+
+					<li class="nav-item mr-3 ml-2"><a class="nav-link"
+						th:href="@{/principal/} + ${proyectoActivo}">Gestión del
+							Proyecto <span class="sr-only">(current)</span>
+					</a></li>
+					<li class="nav-item mr-3 ml-3"><a class="nav-link"
+						th:href="@{/tecnicos}"> Gestión de Técnicos </a></li>
+					<li class="nav-item mr-3 ml-3"><a class="nav-link"
+						th:href="@{/incidencias}"> Gestión de Incidencias </a></li>
+					<li class="nav-item active mr-3 ml-3"><a class="nav-link"
+						href="#"><strong> Administración</strong> </a></li>
+				</ul>
+			</div>
+			<a class="navbar-brand text-warning pt-2 pb-2"
+				th:href="@{/principal/logout}"><small><strong>Cerrar
+						proyecto</strong></small></a>
+		</nav>
+	</header>
 
 	<!-- MENU INTERNO DE LA PARTE DE ADMINISTRACIÓN -->
 	<div class="container col-md-12 p-0">
 		<div class="page-header">
-		 <nav class="navbar navbar-expand-lg p-0" style="background-color: #faf9ad;">
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-		 <ul class="navbar-nav mr-auto ">
-              <li class="nav-item mr-5 ml-5">
-                <a style="color: #364ea9;" id="enlaceAdministracion" class="nav-link" href="#"> <strong>Provincias / Kilometraje </strong></a>
-              </li>
-              <li class="nav-item mr-5 ml-5">
-                <a style="color: #8095e8" id="enlaceAdministracion" class="nav-link" th:href="@{/administracionparametros}"> <strong>Parámetros para los cálculos</strong> </a>
-              </li>
-            </ul>
-		</div>
-		</nav>
-		</div>
-		
-		<div class="row mt-3">
-			<div class="col-md-1"></div>
-			<div class="col-md-10 text-center">
-
-				<table id="tableProyectos" class="table table-sm">
-							<thead>
-								<tr>
-									<th scope="col">Id</th>
-									<th scope="col">Localidad</th>
-									<th scope="col">Provincia</th>
-									<th scope="col">Kilómetros</th>
-									<th scope="col">Acciones</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr th:each="reg: ${listakm}">
-									<td th:text="${reg.id_reg}"></td>
-									<td th:text="${reg.localidad}"></td>
-									<td th:text="${reg.provincia}"></td>
-									<td th:text="${reg.kilometros}"></td>
-									<td>
-										<div class="btn-group">
-											<a type="button" class="btn btn-default mr-1"> <span
-												class="far fa-edit"></span>
-											</a> <a type="button" onclick="return mostrarConfirmacion()"
-												href="#" class="btn btn-default ml-1"> <span
-												class="far fa-trash-alt" style="color: red;"></span>
-											</a>
-										</div>
-									</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
+			<nav class="navbar navbar-expand-lg p-0"
+				style="background-color: #faf9ad;">
+				<div class="collapse navbar-collapse" id="navbarSupportedContent">
+					<ul class="navbar-nav mr-auto ">
+						<li class="nav-item mr-5 ml-5"><a style="color: #364ea9;"
+							id="enlaceAdministracion" class="nav-link" href="#"> <strong>Provincias
+									/ Kilometraje </strong></a></li>
+						<li class="nav-item mr-5 ml-5"><a style="color: #8095e8"
+							id="enlaceAdministracion" class="nav-link"
+							th:href="@{/administracionparametros}"> <strong>Parámetros
+									para los cálculos</strong>
+						</a></li>
+					</ul>
 				</div>
+			</nav>
+		</div>
 
+		<div class="row w-100 mt-4" style="justify-content: center;">
+		<div class="col-md-9">
+			<div class="card">
+				<div class="card-header p-1 text-center" style="background-color: #e9ecef">
+					<h5 class="card-title">Añadir registro a la tabla</h5>
+				</div>
+				<div class="card-body">
+					<form id="nuevoRegistroProvincia" role="form" method="post">
+						<div class="w-100" id="elementosFormulario" style="justify-content: space-around; display: flex inline">
+						<div class="form-group row w-25">
+							
+								<input type="text" name="localidad" class="form-control"
+									id="inputLocalidad" placeholder="Introducir la localidad" />
+						
+						</div>
+						<div class="form-group row w-25">
+							
+								<input name="provincia" class="form-control" id="inputProvincia"
+									placeholder="Introducir la provincia"></input>
+						
+						</div>
+						<div class="form-group row w-25">
+							
+								<input type="number" step="any" name="kilometros"
+									class="form-control" id="inputKilometros"
+									placeholder="Introducir los kilometros"></input>
+						
+						</div>
+						</div>
+						<div class="modal-footer">
+							<button type="reset" class="btn btn-default" data-dismiss="modal">Limpiar</button>
+							<button type="submit" class="btn btn-primary">Crear
+								registro</button>
+						</div>
+					</form>
+				</div>
 			</div>
-	
-	
- 	<!-- AQUI COMIENZA LA OPCION DE ADMINISTRACION KILOMETRAJES  -->		
+			</div>
+		</div>
+
+		<div class="row w-100 mt-4" style="justify-content: center;">
+			<div class="col-md-8 text-center">
+
+				<table id="tableProvincias" class="table table-sm">
+					<thead class="thead-light">
+						<tr>
+							<th scope="col">Id</th>
+							<th scope="col">Localidad</th>
+							<th scope="col">Provincia</th>
+							<th scope="col">Kilómetros</th>
+							<th scope="col">Acciones</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="reg: ${listakm}">
+							<td th:text="${reg.id_reg}"></td>
+							<td th:text="${reg.localidad}"></td>
+							<td th:text="${reg.provincia}"></td>
+							<td th:text="${reg.kilometros}"></td>
+							<td>
+								<div class="btn-group">
+									<a type="button" class="btn btn-default mr-1"> <span
+										class="far fa-edit"></span>
+									</a> <a type="button" onclick="return mostrarConfirmacion()"
+										href="#" class="btn btn-default ml-1"> <span
+										class="far fa-trash-alt" style="color: red;"></span>
+									</a>
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+
+	</div>
+
+
+	<!-- AQUI COMIENZA LA OPCION DE ADMINISTRACION KILOMETRAJES  -->
 
 	<footer th:replace="fragments/fragments::footer"></footer>
-
+	<script>
+		$(document).ready(function() {
+			var table = $('#tableProvincias').DataTable({
+				"pagingType" : "numbers",
+				"language" : {
+					"lengthMenu" : "",
+					"search" : "Buscar registro: ",
+					"info" : "",
+					"infoFiltered" : "(filtrados de _MAX_ registros en total)",
+					"loadingRecords" : "Cargando...",
+					"processing" : "Procesando...",
+					"infoEmpty" : "No se encuentran registros",
+					"zeroRecords" : "Sin resultados"
+				},
+				"lengthMenu" : [ 10, 20, 30, 40 ],
+				"order" : [ 0, 'asc' ]
+			});
+		});
+	</script>
 </body>
 </html>
